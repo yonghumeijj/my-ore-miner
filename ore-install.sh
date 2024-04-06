@@ -82,7 +82,8 @@ case $choice in
         sudo apt install sysstat
         ;;
     9)
-        sar -u 1 15    
+        sar -u 1 15  
+        ;;
     *)
         echo "选择了无效的选项。退出。"
         exit 1
