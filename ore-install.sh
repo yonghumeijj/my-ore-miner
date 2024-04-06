@@ -11,7 +11,7 @@ echo "7) 用pm2 运行 Ore 提取奖励"
 read -p "请输入选项 [1-7]: " choice
 
 default_rpc="https://api.mainnet-beta.solana.com"
-default_threads=4
+default_threads=8
 
 case $choice in
     1)
@@ -25,7 +25,9 @@ case $choice in
         sh -c "$(curl -sSfL https://release.solana.com/v1.18.4/install)"
         echo "正在生成 Solana 密钥对..."
         export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
-        solana-keygen new
+        solana-keygen new --derivation-path m/44'/501'/0'/0' --force
+        cat ~/.config/solana/id.json
+        echo "请将上面的钱包信息保存..."
         ;;
     3)
         echo "正在安装 Ore CLI..."
@@ -50,7 +52,7 @@ case $choice in
         echo "创建 Ore 矿工运行脚本..."
         read -p "请输入 Ore RPC 地址 [直接回车则默认: ${default_rpc}]: " rpc
         rpc=${rpc:-$default_rpc}
-        read -p "请输入矿工进程数 [直接回车则默认: ${default_threads}]: " threads
+        read -p "请输入挖矿线程数 [直接回车则默认: ${default_threads}]: " threads
         threads=${threads:-$default_threads}
         echo "#!/bin/bash" > ore_miner.sh
         echo "ore --rpc ${rpc} --keypair ~/.config/solana/id.json --priority-fee 500000 mine --threads ${threads}" >> ore_miner.sh
