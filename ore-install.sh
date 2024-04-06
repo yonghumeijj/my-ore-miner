@@ -10,7 +10,7 @@ echo "6) 查看奖励数量"
 echo "7) 用pm2 运行 Ore 提取奖励"
 echo "8) 安装systemstate包(使用9 查看CPU占用)"
 echo "9) 查看15秒CPU占用"
-read -p "请输入选项 [1-7]: " choice
+read -p "请输入选项 [1-9]: " choice
 
 default_rpc="https://api.mainnet-beta.solana.com"
 default_threads=8
