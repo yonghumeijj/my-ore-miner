@@ -8,6 +8,8 @@ echo "4) 安装 nvm、Node.js 和全局安装 pm2"
 echo "5) 用 pm2 运行 Ore 矿工"
 echo "6) 查看奖励数量"
 echo "7) 用pm2 运行 Ore 提取奖励"
+echo "8) 安装systemstate包(使用9 查看CPU占用)"
+echo "9) 查看15秒CPU占用"
 read -p "请输入选项 [1-7]: " choice
 
 default_rpc="https://api.mainnet-beta.solana.com"
@@ -75,6 +77,12 @@ case $choice in
         pm2 start ore_claimer.sh --name ore-claimer
         echo "Ore 矿工运行脚本已经通过 pm2 在后台启动。"
         ;;
+    8）
+        echo "安装systate查看CPU占用工具"
+        sudo apt install sysstat
+        ;;
+    9)
+        sar -u 1 15    
     *)
         echo "选择了无效的选项。退出。"
         exit 1
